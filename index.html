@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ConectaChat: projeto acadêmico de aplicativo de mensagens." />
+  <title>ConectaChat | Mensagens</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <header class="sidebar-top">
+        <div class="brand"><span class="brand-mark">C</span><div><strong>ConectaChat</strong><small>conectando pessoas</small></div></div>
+        <button class="icon-button" id="newChatBtn" title="Nova conversa" aria-label="Nova conversa">＋</button>
+      </header>
+      <div class="profile-strip">
+        <button class="avatar avatar-me" id="profileAvatar" aria-label="Abrir perfil">E</button>
+        <div class="profile-summary"><strong id="sidebarUserName">Erick</strong><small>Disponível</small></div>
+        <button class="icon-button" id="settingsBtn" title="Perfil e configurações" aria-label="Perfil e configurações">⚙</button>
+      </div>
+      <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Pesquisar conversas..." aria-label="Pesquisar conversas" /><button id="clearSearch" class="clear-search" aria-label="Limpar pesquisa">×</button></div>
+      <nav class="filters" aria-label="Filtrar conversas">
+        <button class="filter active" data-filter="all">Todas</button><button class="filter" data-filter="unread">Não lidas</button><button class="filter" data-filter="groups">Grupos</button>
+      </nav>
+      <section class="chat-list" id="chatList" aria-label="Lista de conversas"></section>
+      <footer class="sidebar-footer"><span class="online-dot"></span> ConectaChat está funcionando <span class="version">v1.0</span></footer>
+    </aside>
+
+    <section class="conversation" id="conversation">
+      <header class="conversation-header" id="conversationHeader">
+        <button class="icon-button back-button" id="backBtn" aria-label="Voltar às conversas">‹</button>
+        <div class="avatar" id="headerAvatar">J</div>
+        <div class="contact-heading"><strong id="headerName">João Silva</strong><small id="headerStatus">online agora</small></div>
+        <div class="header-actions"><button class="icon-button" id="searchInChatBtn" title="Pesquisar nesta conversa" aria-label="Pesquisar nesta conversa">⌕</button><button class="icon-button" id="chatInfoBtn" title="Informações da conversa" aria-label="Informações da conversa">ⓘ</button></div>
+      </header>
+      <div class="chat-search-bar hidden" id="chatSearchBar"><input id="chatSearchInput" placeholder="Buscar nesta conversa..." /><button class="secondary-button" id="closeChatSearch">Fechar</button></div>
+      <div class="messages" id="messages" aria-live="polite"></div>
+      <div class="typing-indicator hidden" id="typingIndicator"><span></span><span></span><span></span> digitando...</div>
+      <form class="composer" id="messageForm">
+        <button type="button" class="icon-button composer-tool" id="emojiBtn" title="Inserir emoji" aria-label="Inserir emoji">☺</button>
+        <button type="button" class="icon-button composer-tool attach-button" id="attachBtn" title="Anexar arquivo (demonstração)" aria-label="Anexar arquivo">＋</button>
+        <textarea id="messageInput" rows="1" placeholder="Digite uma mensagem..." aria-label="Digite uma mensagem" required></textarea>
+        <button type="submit" class="send-button" aria-label="Enviar mensagem" title="Enviar mensagem">➤</button>
+      </form>
+      <div class="composer-hint">Enter para enviar · Shift + Enter para pular linha</div>
+      <div class="welcome-screen hidden" id="welcomeScreen"><div class="welcome-icon">✉</div><h2>Suas conversas em um só lugar</h2><p>Escolha uma conversa ao lado ou comece uma nova.</p><button class="primary-button" id="welcomeNewChat">＋ Nova conversa</button></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <form class="modal" id="profileForm"><button type="button" class="modal-close" data-close="profileModal" aria-label="Fechar">×</button><div class="modal-symbol">⚙</div><h2 id="profileTitle">Seu perfil</h2><p class="modal-description">Personalize como você aparece no ConectaChat.</p>
+      <label for="profileName">Seu nome</label><input id="profileName" maxlength="40" required />
+      <label for="profileStatus">Status</label><input id="profileStatus" maxlength="80" placeholder="Ex.: Disponível para conversar" />
+      <label for="themeSelect">Aparência</label><select id="themeSelect"><option value="light">Claro</option><option value="dark">Escuro</option></select>
+      <button class="primary-button full-width" type="submit">Salvar alterações</button>
+    </form>
+  </div>
+
+  <div class="modal-backdrop hidden" id="newChatModal" role="dialog" aria-modal="true" aria-labelledby="newChatTitle">
+    <form class="modal" id="newChatForm"><button type="button" class="modal-close" data-close="newChatModal" aria-label="Fechar">×</button><div class="modal-symbol">＋</div><h2 id="newChatTitle">Nova conversa</h2><p class="modal-description">Crie uma conversa de demonstração.</p>
+      <label for="newContactName">Nome do contato ou grupo</label><input id="newContactName" maxlength="45" placeholder="Ex.: Ana Souza ou Turma DSI16" required />
+      <label class="checkbox-label"><input type="checkbox" id="newContactIsGroup" /> Esta conversa é um grupo</label>
+      <button class="primary-button full-width" type="submit">Criar conversa</button>
+    </form>
+  </div>
+
+  <div class="modal-backdrop hidden" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+    <div class="modal"><button type="button" class="modal-close" data-close="infoModal" aria-label="Fechar">×</button><div class="modal-symbol">ⓘ</div><h2 id="infoTitle">Informações da conversa</h2><p id="infoName" class="info-name"></p><p id="infoType" class="modal-description"></p><div class="info-note">Este projeto é uma demonstração acadêmica. Não realiza chamadas reais nem envia mensagens pela internet.</div><button class="secondary-button full-width" data-close="infoModal">Entendi</button></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
