@@ -214,3 +214,46 @@ window.addEventListener('resize', () => { if (window.innerWidth > 760) els.app.c
 
 renderAll();
 if (window.innerWidth <= 760) els.app.classList.remove('chat-open');
+
+// Acesso demonstrativo local (não substitui autenticação com servidor).
+(function setupDemoAccess(){
+  const authModal = document.querySelector('#authModal');
+  const authForm = document.querySelector('#authForm');
+  const authName = document.querySelector('#authName');
+  const authEmail = document.querySelector('#authEmail');
+  const authPassword = document.querySelector('#authPassword');
+  const registerBtn = document.querySelector('#registerBtn');
+  const logoutBtn = document.querySelector('#logoutBtn');
+  const SESSION_KEY = 'conectachat-demo-session';
+  const USERS_KEY = 'conectachat-demo-profiles';
+  function showAuth(){ authModal.classList.remove('hidden'); }
+  function hideAuth(){ authModal.classList.add('hidden'); }
+  function profiles(){ try{return JSON.parse(localStorage.getItem(USERS_KEY)||'{}')}catch{return {}} }
+  function saveProfiles(data){localStorage.setItem(USERS_KEY,JSON.stringify(data));}
+  function enter(name,email){
+    localStorage.setItem(SESSION_KEY,JSON.stringify({name,email}));
+    if(name){state.profile.name=name;saveState();renderAll();}
+    hideAuth();showToast('Acesso de demonstração iniciado.');
+  }
+  authForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    const email=authEmail.value.trim().toLowerCase();
+    const password=authPassword.value;
+    const all=profiles();
+    const user=all[email];
+    if(!user){showToast('Perfil não encontrado. Use “Criar perfil local”.');return;}
+    if(user.password!==password){showToast('Senha incorreta para este perfil local.');return;}
+    enter(user.name,email);
+  });
+  registerBtn.addEventListener('click',()=>{
+    const name=authName.value.trim(); const email=authEmail.value.trim().toLowerCase(); const password=authPassword.value;
+    if(!name){showToast('Digite seu nome para criar o perfil.');authName.focus();return;}
+    if(!authEmail.checkValidity()||!email){showToast('Digite um e-mail válido.');authEmail.focus();return;}
+    if(password.length<4){showToast('Use pelo menos 4 caracteres na senha demonstrativa.');authPassword.focus();return;}
+    const all=profiles(); if(all[email]){showToast('Já existe um perfil local com esse e-mail.');return;}
+    all[email]={name,password};saveProfiles(all);enter(name,email);
+  });
+  logoutBtn.addEventListener('click',()=>{localStorage.removeItem(SESSION_KEY);authForm.reset();showAuth();});
+  const session=(()=>{try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}})();
+  if(!session) showAuth(); else if(session.name && state.profile.name!==session.name){state.profile.name=session.name;saveState();renderAll();}
+})();

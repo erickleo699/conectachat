@@ -17,7 +17,7 @@
       <div class="profile-strip">
         <button class="avatar avatar-me" id="profileAvatar" aria-label="Abrir perfil">E</button>
         <div class="profile-summary"><strong id="sidebarUserName">Erick</strong><small>Disponível</small></div>
-        <button class="icon-button" id="settingsBtn" title="Perfil e configurações" aria-label="Perfil e configurações">⚙</button>
+        <button class="icon-button" id="settingsBtn" title="Perfil e configurações" aria-label="Perfil e configurações">⚙</button><button class="icon-button" id="logoutBtn" title="Sair da demonstração" aria-label="Sair">↪</button>
       </div>
       <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Pesquisar conversas..." aria-label="Pesquisar conversas" /><button id="clearSearch" class="clear-search" aria-label="Limpar pesquisa">×</button></div>
       <nav class="filters" aria-label="Filtrar conversas">
@@ -69,6 +69,15 @@
     <div class="modal"><button type="button" class="modal-close" data-close="infoModal" aria-label="Fechar">×</button><div class="modal-symbol">ⓘ</div><h2 id="infoTitle">Informações da conversa</h2><p id="infoName" class="info-name"></p><p id="infoType" class="modal-description"></p><div class="info-note">Este projeto é uma demonstração acadêmica. Não realiza chamadas reais nem envia mensagens pela internet.</div><button class="secondary-button full-width" data-close="infoModal">Entendi</button></div>
   </div>
 
+  <div class="modal-backdrop hidden" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <form class="modal" id="authForm"><div class="modal-symbol">✦</div><h2 id="authTitle">Bem-vindo ao ConectaChat</h2><p class="modal-description">Entre na demonstração ou crie um perfil local neste navegador.</p>
+      <label for="authName">Seu nome (para cadastro)</label><input id="authName" maxlength="40" placeholder="Ex.: Erick" />
+      <label for="authEmail">E-mail de demonstração</label><input id="authEmail" type="email" required placeholder="voce@exemplo.com" />
+      <label for="authPassword">Senha de demonstração</label><input id="authPassword" type="password" minlength="4" required placeholder="Mínimo de 4 caracteres" />
+      <div class="auth-actions"><button class="primary-button" id="loginBtn" type="submit">Entrar</button><button class="secondary-button" id="registerBtn" type="button">Criar perfil local</button></div>
+      <p class="auth-warning">Projeto acadêmico: este acesso é salvo apenas neste navegador e não é autenticação segura nem uma conta online.</p>
+    </form>
+  </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>

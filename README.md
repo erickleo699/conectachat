@@ -1,32 +1,29 @@
-# ConectaChat Color — Projeto acadêmico
+# ConectaChat Pro — Projeto acadêmico
 
-Aplicativo demonstrativo de mensagens com identidade visual colorida, gradientes roxos e rosas, cartões suaves e interface adaptada para computador e celular. O projeto usa aplicações de mensagens como referência conceitual, sem copiar marca ou código proprietário.
+Aplicativo demonstrativo de mensagens inspirado em padrões comuns de mensageria. Inclui identidade visual roxa/lilás, interface responsiva e acesso de demonstração local.
 
 ## Funcionalidades
 - Lista de conversas individuais e grupos simulados
-- Pesquisa e filtros por todas, não lidas e grupos
+- Pesquisa global e busca dentro da conversa
+- Filtros por todas, não lidas e grupos
 - Envio de mensagens e respostas automáticas demonstrativas
-- Busca dentro da conversa
-- Criação de conversas
+- Criação de conversas de demonstração
 - Perfil e status editáveis
 - Tema claro e escuro
-- Botão de emojis e demonstração de anexo
+- Inserção de emojis
 - Histórico salvo localmente no navegador
-- Layout responsivo para celular e computador
+- Interface adaptada para celular e computador
+- Tela de entrada e criação de perfil local para demonstração
+- Botão para sair da sessão de demonstração
 
 ## Tecnologias
-- HTML5
-- CSS3 (gradientes, variáveis CSS, animações e media queries)
-- JavaScript
-- localStorage para salvar dados localmente
+HTML5, CSS3 e JavaScript puro; armazenamento local do navegador (`localStorage`).
 
 ## Como executar
-1. Baixe e extraia os arquivos.
-2. Abra `index.html` em um navegador moderno.
-3. Para publicar, envie `index.html`, `style.css`, `script.js` e `README.md` ao repositório GitHub e habilite GitHub Pages.
+Abra `index.html` no navegador ou publique os arquivos na raiz de um repositório GitHub Pages.
 
-## Limitações
-Este é um protótipo acadêmico front-end. Não possui servidor, banco de dados remoto, autenticação real, chamadas reais ou mensagens em tempo real entre pessoas diferentes. As respostas automáticas são simuladas.
+## Importante sobre segurança e limitações
+Este é um protótipo acadêmico front-end. O acesso e os perfis ficam apenas no navegador e **não constituem autenticação segura**. Não armazene senhas reais. Os dados não são sincronizados entre dispositivos e as mensagens não são enviadas pela internet. Para contas reais, mensagens em tempo real e persistência multiusuário, é necessário integrar um backend e um serviço de autenticação/banco de dados (por exemplo, Supabase ou Firebase), com regras de segurança configuradas.
 
 ## Dados acadêmicos
 - Aluno: Erick Leandro do Sacramento Nascimento
